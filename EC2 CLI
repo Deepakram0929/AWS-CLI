@@ -1,0 +1,46 @@
+1. To launch ec2 instances with name
+aws ec2 run-instances --image ami-08b5b3a93ed654d19 --instance-type t2.micro --key-name aws-key-0929 --security-group-ids sg-0e9b2e625f5c3168d \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=win-ser-1}]'
+
+2. To launch ec2 instance with user-data and specific availability zone
+aws ec2 run-instances --image ami-08b5b3a93ed654d19 --instance-type t2.micro --key-name aws-key-0929 --security-group-ids sg-0e9b2e625f5c3168d --subnet-id subnet-01ecf0594e28947df \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=user-data}]' --user-data file://user-data.txt
+
+3.To launch ec2 instance with subnet,user-data,IAM-Role and count
+aws ec2 run-instances --image ami-08b5b3a93ed654d19 --instance-type t2.micro --key-name aws-key-0929 --security-group-ids sg-0e9b2e625f5c3168d --subnet-id subnet-01ecf0594e28947df \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=web-application}]' --user-data file://user-data.txt \
+--iam-instance-profile Name=ec2-s3-full-access --count 3
+
+4. To create Ebs volume
+aws ec2 create-volume --size 5 --availability-zone us-east-1b
+
+5. To attach Ebs volume
+aws ec2 attach-volume --volume-id vol-01ace7215e7239ea2 --instance-id i-033bfcd917e7f27b5 --device xvdf
+
+6.To detach Ebs volume
+aws ec2 detach-volume --volume-id vol-01ace7215e7239ea2	
+
+7.To stop instances
+aws ec2 stop-instances --instance-ids i-033bfcd917e7f27b5 i-0dbce8ccae865dd1c i-09060d0cd34a577b0
+
+8.To start instances
+aws ec2 start-instances --instance-ids i-0945c705e960f62d4
+
+9.To launch 2 windows instances
+
+aws ec2 run-instances --image ami-02e3d076cbd5c28fa --instance-type t3.medium --key-name aws-key-0929 --security-group-ids sg-0b5b31eb64c1cb822 \
+--subnet-id subnet-0936a2a3542bb45c1 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=window-ser-1}]'
+
+10. To create snapshot
+aws ec2 create-snapshot --volume-id vol-01ace7215e7239ea2 --description "5gb snapshot"
+
+
+11. Create volume from snapshot
+aws ec2 create-volume --snapshot-id snap-073c3acccabdedf73 --availability-zone us-east-1c
+
+12. To attach Ebs volume to windows
+aws ec2 attach-volume --volume-id vol-010d13758f6ba07a4 --instance-id i-0bd9e50f7061fed7f --device xvdf
+
+13. To detach Ebs volume
+aws ec2 detach-volume --volume-id vol-010d13758f6ba07a4	
+
